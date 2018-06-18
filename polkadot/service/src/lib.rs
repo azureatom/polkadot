@@ -22,6 +22,8 @@ extern crate ed25519;
 extern crate clap;
 extern crate exit_future;
 extern crate tokio_timer;
+extern crate serde;
+extern crate serde_json;
 extern crate polkadot_primitives;
 extern crate polkadot_runtime;
 extern crate polkadot_executor;
@@ -49,9 +51,14 @@ extern crate error_chain;
 extern crate slog;	// needed until we can reexport `slog_info` from `polkadot_telemetry`
 #[macro_use]
 extern crate log;
+#[macro_use]
+extern crate serde_derive;
+#[macro_use]
+extern crate hex_literal;
 
 mod error;
 mod config;
+mod chain_spec;
 
 use runtime_primitives::MakeStorage;
 use std::collections::HashMap;
@@ -73,6 +80,7 @@ use exit_future::Signal;
 
 pub use self::error::{ErrorKind, Error};
 pub use config::{Configuration, Role};
+pub use chain_spec::ChainSpec;
 
 type CodeExecutor = NativeExecutor<LocalDispatch>;
 
